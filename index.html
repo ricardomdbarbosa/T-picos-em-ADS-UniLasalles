@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banco de Dados</title>
+  <link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+
+  <header>
+    <h1>Banco de dados em Json</h1>
+
+  </header>
+  <section>
+    <div id="botoes">
+      <a href="/páginas/insert.html"><button>Cadastrar</button></a>
+      <a href="/páginas/consult.html"><button>Consultar um registro por id</button></a>
+      <a href="/páginas/update.html"><button>Modificar</button></a>
+      <a href="/páginas/remove.html"><button>Remover</button></a>
+      <a href="/páginas/grafico.html"><button>Gráfico</button></a>
+      <a href="/páginas/consulta_varios_reg.html"><button>Consultar vários registros</button></a>
+
+    </div>
+
+    <div id="inserir">
+
+    </div>
+
+    <div id="resultado">
+
+      <h1>Resultado:</h1>
+
+    </div>
+  </section>
+
+
+  <footer>
+
+  </footer>
+  <script type="module">
+
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBd2jKoruCdhbzkotI_v5KPNWIfW4P5NBE",
+      authDomain: "unisalles.firebaseapp.com",
+      projectId: "unisalles",
+      storageBucket: "unisalles.appspot.com",
+      messagingSenderId: "971002886443",
+      appId: "1:971002886443:web:df6170d7f6a49458006d6e"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    const db = getDatabase(app);
+
+  </script>
+
+
+
+
+
+
+
+</body>
+
+</html>
