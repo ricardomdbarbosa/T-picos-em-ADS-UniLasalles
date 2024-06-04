@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Banco de Dados</title>
+</head>
+<body>
+    <header>
+        <h1>Banco de dados em Json</h1>
+    </header>
+    <section>
+        <div id="botoes">
+            <h1>Remover</h1>
+            <input type="number" id="id" placeholder="id">
+            <br>
+            <button type="submit" id="remover">Remover</button>
+            <a href="/index.html"><button class="botao">Voltar</button></a>
+        </div>
+        <div id="resultado">
+            <h1>Resultado:</h1>
+        </div>
+    </section>
+    <footer>
+    </footer>
+
+    <script type="module">
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        import { getDatabase, ref, set, get, child, remove } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBd2jKoruCdhbzkotI_v5KPNWIfW4P5NBE",
+            authDomain: "unisalles.firebaseapp.com",
+            projectId: "unisalles",
+            storageBucket: "unisalles.appspot.com",
+            messagingSenderId: "971002886443",
+            appId: "1:971002886443:web:df6170d7f6a49458006d6e"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        //Método de evento
+        document.getElementById("remover").addEventListener('click', function (remover) {
+            var id = document.getElementById('id');
+            var nome = document.getElementById('nome');
+            var idade = document.getElementById('idade');
+            var sexo = document.getElementById('sexo');
+            //Método remove com a referência do nó do banco de dados
+            remove(ref(db, 'Cadastro/' + id.value))
+            window.alert("Removido");
+        })
+    </script>
+</body>
+
+</html>

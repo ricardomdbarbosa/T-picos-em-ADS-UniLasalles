@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banco de Dados</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Banco de dados em Json</h1>
+  </header>
+  <section>
+    <div id="graficos">
+      <canvas id="meuGrafico"></canvas>
+    </div>
+    <a href="/index.html"><button>Voltar</button></a>
+  </section>
+  <footer>
+
+  </footer>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getDatabase, ref, set, get, child, equalTo, orderByChild, query, onValue } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBd2jKoruCdhbzkotI_v5KPNWIfW4P5NBE",
+      authDomain: "unisalles.firebaseapp.com",
+      projectId: "unisalles",
+      storageBucket: "unisalles.appspot.com",
+      messagingSenderId: "971002886443",
+      appId: "1:971002886443:web:df6170d7f6a49458006d6e"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    //referência do nó principal
+    const cadastros = ref(db, "/Cadastro");
+    var cont_masculino = 0;
+    var cont_feminino = 0;
+    var cont_idade18 = 0;
+    var cont_idade60 = 0;
+    var soma_idades = 0;
+    var media_idade = 0;
+    var cont_usuario = 0
+
+    //Captura dos dados
+
+    onValue(cadastros, (snapshot) => {
+      if (snapshot.exists()) {
+        snapshot.forEach(childSnapshot => {
+          cont_usuario++;
+          const sexo = childSnapshot.val().Sexo;
+          if (sexo === "Masculino") {
+            //Criando contador para o campo Masculino no gráfico
+            cont_masculino++;
+          } else if (sexo === "Feminino") {
+            //Criando contador feminino
+            cont_feminino++;
+          }
+          var idade = parseInt(childSnapshot.val().Idade);
+          if (idade <= 18) {
+            //Contador de idade -18
+            cont_idade18++;
+          }
+          else if (idade >= 60) {
+            //Contador de idade +60
+            cont_idade60++
+
+          }
+          soma_idades += idade;
+        });
+        //Média idades
+        media_idade = soma_idades / cont_usuario;
+
+        // Agora que a contagem foi concluída, é criado o gráfico
+        var ctx = document.getElementById('meuGrafico').getContext('2d');
+        var data = {
+          labels: ['Qtd Usuários', 'Sexo Femino', 'Sexo Masculino', 'Média de idade', 'Abaixo de 18 anos', 'Acima de 60 anos'],
+          datasets: [{
+            label: 'Cadastro',
+            backgroundColor: 'rgb(54, 162, 235)',
+            borderColor: 'rgb(54, 162, 235)',
+            data: [cont_usuario, cont_feminino, cont_masculino, media_idade, cont_idade18, cont_idade60]
+          }]
+        };
+        var options = {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: 'red' // Define a cor do texto da legenda para vermelho
+              }
+            },
+            bodyColor: 'white', // Define a cor do texto do tooltip para azul
+          }
+        };
+        var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: data,
+          options: options
+        });
+
+      }
+    });
+  </script>
+</body>
+
+</html>
+
+

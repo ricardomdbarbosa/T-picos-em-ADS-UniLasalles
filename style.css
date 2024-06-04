@@ -1,0 +1,32 @@
+body{
+    color: black; 
+    text-align: center;
+    background:url(imagens/7289c0e0-4b15-4b89-9e44-a0cd4216c6b5.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: azure;
+}
+
+section{
+    background-color: rgba(132, 132, 224, 0.291);
+    text-align: center;
+    margin:auto;
+    width: 400px;
+    border-radius: 50px;
+    color: white;
+    padding: 30px;
+    
+ 
+}
+
+button{
+
+    border-radius: 5px;
+    box-shadow:5dvb;
+}
+
+
+.botao{
+    background-color: grey;
+    color: azure;
+}

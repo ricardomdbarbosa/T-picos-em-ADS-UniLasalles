@@ -4,39 +4,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Banco de Dados</title>
   <link rel="stylesheet" href="/style.css">
+  <title>Banco de Dados</title>
 </head>
 
 <body>
-
   <header>
     <h1>Banco de dados em Json</h1>
+
   </header>
+
   <section>
     <div id="botoes">
-      <a href="/páginas/insert.html"><button>Cadastrar</button></a>
-      <a href="/páginas/consult.html"><button>Consultar um registro por id</button></a>
-      <a href="/páginas/update.html"><button>Modificar</button></a>
-      <a href="/páginas/remove.html"><button>Remover</button></a>
-      <a href="/páginas/grafico.html"><button>Gráfico</button></a>
-      <a href="/páginas/consulta_varios_reg.html"><button>Consultar vários registros</button></a>
+      <h1>Inserir Dados de usuário</h1>
+
+      <input type="number" id="id" placeholder="id">
+      <br>
+      <input type="text" id="nome" placeholder="Nome">
+      <br>
+      <input type="number" id="idade" placeholder="idade">
+      <br>
+      <input type="text" id="sexo" placeholder="sexo">
+      <br>
+      <br>
+      <input type="submit" id="submit">
+      <a href="/index.html"><button class="botao">Voltar</button></a>
     </div>
-
-    <div id="inserir">
-
-    </div>
-
     <div id="resultado">
-
       <h1>Resultado:</h1>
-
     </div>
   </section>
   <footer>
   </footer>
-  <script type="module">
 
+  <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
     import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
@@ -54,6 +55,26 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
+
+    //método de evento    
+    document.getElementById("submit").addEventListener('click', function (inserir) {
+
+      //váriaveis com os dados retornados do input
+      var id = document.getElementById('id');
+      var nome = document.getElementById('nome');
+      var idade = document.getElementById('idade');
+      var sexo = document.getElementById('sexo');
+
+      //Método SET para iserir dados no banco
+      set(ref(db, 'Cadastro/' + id.value), {
+        Id: id.value,
+        Usuário: nome.value,
+        Idade: idade.value,
+        Sexo: sexo.value
+      });
+
+      window.alert(`Dados inseridos con sucesso`);
+    })
   </script>
 </body>
 
